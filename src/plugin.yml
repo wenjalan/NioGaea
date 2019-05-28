@@ -1,0 +1,5 @@
+name: NioGaea
+version: 1.0
+author: wenjalan
+main: wenjalan.NioGaea
+api-version: 1.14
