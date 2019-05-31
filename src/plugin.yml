@@ -4,3 +4,10 @@ author: wenjalan
 main: wenjalan.NioGaea
 api-version: 1.14
 load: startup
+commands:
+  setoctavegeneratoroctaves:
+    description: Set the number of octaves to use in the Octave Generator
+    usage: /setoctavegeneratoroctaves [amount]
+  setoctavegeneratorscale:
+    description: Set the scale of a specific coordinate in the Octave Generator
+    usage: /setoctavegeneratorscale [W, X, Y, Z] [amount]

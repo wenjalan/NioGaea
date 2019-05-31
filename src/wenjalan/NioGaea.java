@@ -2,13 +2,18 @@ package wenjalan;
 
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
+import wenjalan.commands.SetOctaveGeneratorOctaves;
+import wenjalan.commands.SetOctaveGeneratorScale;
 import wenjalan.generators.GaeaGenerator;
 
 public class NioGaea extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        super.onEnable();
+        // assign command executors
+        getCommand("setoctavegeneratoroctaves").setExecutor(new SetOctaveGeneratorOctaves());
+        getCommand("setoctavegeneratorscale").setExecutor(new SetOctaveGeneratorScale());
+
     }
 
     @Override
