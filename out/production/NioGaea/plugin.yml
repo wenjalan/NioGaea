@@ -4,3 +4,22 @@ author: wenjalan
 main: wenjalan.NioGaea
 api-version: 1.14
 load: startup
+commands:
+  setoctavegeneratoroctaves:
+    description: Set the number of octaves to use in the Octave Generator (default 8)
+    usage: /setoctavegeneratoroctaves [amount]
+  setoctavegeneratorscale:
+    description: Set the scale of a specific coordinate in the Octave Generator (default 0.0005)
+    usage: /setoctavegeneratorscale [W, X, Y, Z] [amount]
+  setmeanheight:
+    description: Set the mean height of terrain generation (default 50)
+    usage: /setmeanheight [amount]
+  setnoisescale:
+    description: Set the noise scale of the terrain generation (default 15.0)
+    usage: /setnoisescale [amount]
+  setnoisefrequency:
+    description: Set the noise frequency of the terrain generation (default 0.5)
+    usage: /setnoisefrequency [amount]
+  setnoiseamplitude:
+    description: Set the noise amplitude of the terrain generation (default 0.5)
+    usage: /setnouseamplitude [amount]

@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexOctaveGenerator;
+import wenjalan.generators.presets.GeneratorPreset;
+import wenjalan.generators.presets.GrandOcean;
 
 import java.util.Random;
 
@@ -21,10 +23,10 @@ public class GaeaGenerator extends ChunkGenerator {
     public static double simplex_octave_generator_w_scale = 0.0005D;
 
     // the X Scale of the octave generator
-    public static double simplex_octave_generator_x_scale = 0.0005D;
+    public static double simplex_octave_generator_x_scale = 0.0125D;
 
     // the Y Scale of the octave generator
-    public static double simplex_octave_generator_y_scale = 0.0005D;
+    public static double simplex_octave_generator_y_scale = 0.0125D;
 
     // the Z Scale of the octave generator
     public static double simplex_octave_generator_z_scale = 0.0005D;
@@ -44,10 +46,27 @@ public class GaeaGenerator extends ChunkGenerator {
     // the material to make the world of
     public static Material material = Material.STONE;
 
-//    // constructor
-//    public GaeaGenerator(String id) {
-//        // simplex_octave_generator_scale = Double.parseDouble(id);
-//    }
+    // the preset we're using
+    public static GeneratorPreset preset;
+
+    // constructor
+    public GaeaGenerator(GeneratorPreset preset) {
+        this.preset = preset;
+        // set fields
+        simplex_octave_generator_w_scale = preset.getW_scale();
+        simplex_octave_generator_x_scale = preset.getX_scale();
+        simplex_octave_generator_y_scale = preset.getY_scale();
+        simplex_octave_generator_z_scale = preset.getZ_scale();
+        mean_height = preset.getMean_height();
+        noise_scale = preset.getNoise_scale();
+        noise_frequency = preset.getNoise_frequency();
+        noise_amplitude = preset.getNoise_amplitude();
+    }
+
+    // constructor none
+    public GaeaGenerator() {
+        // do nothing
+    }
 
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
@@ -79,9 +98,31 @@ public class GaeaGenerator extends ChunkGenerator {
                                 noise_amplitude) * noise_scale + mean_height);
 
                 // set blocks
-                for (int y = height; y >= 0; y--) {
-                    chunkData.setBlock(x, height, z, material);
+                // if this is a Grand Ocean, fill some water
+                if (preset instanceof GrandOcean) {
+                    // stone
+                    for (int y = height; y > 0; y--) {
+                        chunkData.setBlock(x, y, z, Material.STONE);
+                    }
+                    // sand (top 4 blocks)
+                    for (int y = height; y > height - 4; y--) {
+                        chunkData.setBlock(x, y, z, Material.SAND);
+                    }
+                    // fill water to the ocean line above the ground
+                    for (int y = height + 1; y <= GrandOcean.ocean_level; y++) {
+                        chunkData.setBlock(x, y, z, Material.WATER);
+                    }
                 }
+                else {
+                    // stone
+                    for (int y = height; y >= 0; y--) {
+                        chunkData.setBlock(x, y, z, material);
+                    }
+                }
+
+
+                // bedrock
+                chunkData.setBlock(x, 0, z, Material.BEDROCK);
             }
         }
 

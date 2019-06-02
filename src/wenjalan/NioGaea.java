@@ -4,6 +4,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import wenjalan.commands.*;
 import wenjalan.generators.GaeaGenerator;
+import wenjalan.generators.presets.GrandOcean;
 
 public class NioGaea extends JavaPlugin {
 
@@ -26,7 +27,7 @@ public class NioGaea extends JavaPlugin {
 
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-        return new GaeaGenerator();
+        return new GaeaGenerator(new GrandOcean());
     }
 
 }
