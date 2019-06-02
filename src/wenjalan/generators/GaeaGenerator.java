@@ -44,10 +44,10 @@ public class GaeaGenerator extends ChunkGenerator {
     // the material to make the world of
     public static Material material = Material.STONE;
 
-    // constructor
-    public GaeaGenerator(String id) {
-        // simplex_octave_generator_scale = Double.parseDouble(id);
-    }
+//    // constructor
+//    public GaeaGenerator(String id) {
+//        // simplex_octave_generator_scale = Double.parseDouble(id);
+//    }
 
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {

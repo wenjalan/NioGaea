@@ -2,8 +2,7 @@ package wenjalan;
 
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
-import wenjalan.commands.SetOctaveGeneratorOctaves;
-import wenjalan.commands.SetOctaveGeneratorScale;
+import wenjalan.commands.*;
 import wenjalan.generators.GaeaGenerator;
 
 public class NioGaea extends JavaPlugin {
@@ -13,6 +12,10 @@ public class NioGaea extends JavaPlugin {
         // assign command executors
         getCommand("setoctavegeneratoroctaves").setExecutor(new SetOctaveGeneratorOctaves());
         getCommand("setoctavegeneratorscale").setExecutor(new SetOctaveGeneratorScale());
+        getCommand("setmeanheight").setExecutor(new SetMeanGroundHeight());
+        getCommand("setnoisescale").setExecutor(new SetNoiseScale());
+        getCommand("setnoisefrequency").setExecutor(new SetNoiseFrequency());
+        getCommand("setnoiseamplitude").setExecutor(new SetNoiseAmplitude());
 
     }
 
@@ -23,7 +26,7 @@ public class NioGaea extends JavaPlugin {
 
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-        return new GaeaGenerator(id);
+        return new GaeaGenerator();
     }
 
 }
